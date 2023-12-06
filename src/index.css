@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background: url("lowerblob.png"), url("upperblob.png");
+  background-position: left bottom, right top;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-color: #f5f7fb;
+}
+
+/*typography*/
+
+.f-inter {
+  font-family: "Inter", sans-serif;
+  color: #293264;
+  text-align: center;
+}
+
+.f-karla {
+  font-family: "Karla", sans-serif;
+  color: #293264;
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+.start-btn {
+  width: 193px;
+  height: 52px;
+  border: none;
+  border-radius: 15px;
+  background: #4d5b9e;
+  color: #f5f7fb;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
