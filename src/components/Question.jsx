@@ -4,14 +4,9 @@ import { decode } from "html-entities";
 function Question(props) {
   const { question, correctAnswer, incorrectAnswers } = props.question;
   const answersArray = [...incorrectAnswers, correctAnswer];
+  const sortedArray = answersArray.sort(() => Math.random() - 0.5);
 
-  const shuffleAnswers = (answersArray) => {
-    return answersArray.sort(() => Math.random() - 0.5);
-  };
-  shuffleAnswers(answersArray);
-
-  const answerElements = answersArray.map((answer, index) => {
-    shuffleAnswers(answersArray);
+  const answerElements = sortedArray.map((answer, index) => {
     return (
       <div className="answer" key={index}>
         <p>{decode(answer)}</p>
