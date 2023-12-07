@@ -5,7 +5,7 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   margin: 0;
   background: url("lowerblob.png"), url("upperblob.png");
   background-position: left bottom, right top;
@@ -14,18 +14,26 @@ body {
   background-color: #f5f7fb;
 }
 
+/*utitlity classes*/
+
+.d-flex {
+  display: flex;
+}
+
+.align-center {
+  text-align: center;
+}
+
 /*typography*/
 
 .f-inter {
   font-family: "Inter", sans-serif;
   color: #293264;
-  text-align: center;
 }
 
 .f-karla {
   font-family: "Karla", sans-serif;
   color: #293264;
-  text-align: center;
 }
 
 h1,
@@ -51,4 +59,60 @@ p {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 50px;
+  gap: 14px;
+}
+
+.answers {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  margin-bottom: 14px;
+}
+
+.answer {
+  border-radius: 7.942px;
+  border: 0.794px solid #4d5b9e;
+  padding: 4px 8px;
+}
+
+.answer p {
+  color: #293264;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10.24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+hr {
+  border: 0.8px solid #dbdef0;
+}
+
+.check-answers-btn {
+  width: 120px;
+  height: 35px;
+  background: #4d5b9e;
+  border: none;
+  border-radius: 10px;
+  color: #f5f7fb;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10.24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@media (min-width: 768px) {
+  body {
+    width: 600px;
+    margin: auto;
+  }
 }

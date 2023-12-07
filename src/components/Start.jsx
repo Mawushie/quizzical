@@ -3,13 +3,15 @@ import styled from "styled-components";
 
 function Start(props) {
   return (
-    <Container>
-      <h1 className="f-karla">Quizzical</h1>
-      <p className="f-inter">Let's Test your Knowledge!</p>
-      <button className="start-btn" onClick={props.toggleStart}>
-        Start quiz
-      </button>
-    </Container>
+    <div className="d-flex">
+      <Container>
+        <h1 className="f-karla">Quizzical</h1>
+        <p className="f-inter">Let's Test your Knowledge!</p>
+        <button className="start-btn" onClick={props.toggleStart}>
+          Start quiz
+        </button>
+      </Container>
+    </div>
   );
 }
 
@@ -19,10 +21,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 24px;
-
-  h1 {
-    font-weight: 700;
-  }
+  margin: 200px auto;
 `;
 
 export default Start;
