@@ -1,15 +1,18 @@
 import React from "react";
 import { decode } from "html-entities";
+import { useState } from "react";
 
 function Question(props) {
-  const { question, correctAnswer, incorrectAnswers } = props.question;
-  const answersArray = [...incorrectAnswers, correctAnswer];
-  const sortedArray = answersArray.sort(() => Math.random() - 0.5);
+  const { id, question, allAnswers, selected } = props.question;
 
-  const answerElements = sortedArray.map((answer, index) => {
+  const answerElements = allAnswers.map((answer, index) => {
+    const styles = {
+      backgroundColor: answer === selected ? "#D6DBF5" : "transparent",
+    };
+
     return (
-      <div className="answer" key={index}>
-        <p>{decode(answer)}</p>
+      <div className="answer" key={index} style={styles}>
+        <p onClick={() => props.handleSelected(id, answer)}>{decode(answer)}</p>
       </div>
     );
   });
