@@ -12,7 +12,7 @@ function Quiz(props) {
   const [displayResults, setDisplayResults] = useState(false);
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=4&category=10")
+    fetch("https://opentdb.com/api.php?amount=5&category=18")
       .then((res) => res.json())
       .then((data) => {
         let results = data.results;
@@ -28,6 +28,7 @@ function Quiz(props) {
             correctAnswer: correct_answer,
             allAnswers: sortedAnswers,
             selected: "",
+            finalAnswer: "",
           });
         });
         console.log(quizArray);
@@ -36,8 +37,6 @@ function Quiz(props) {
   }, []);
 
   const handleSelected = (id, selectedAnswer) => {
-    // console.log(id, selectedAnswer);
-
     setQuiz((prevQuiz) => {
       const updatedQuiz = prevQuiz.map((quiz) => {
         return quiz.id === id
@@ -57,9 +56,8 @@ function Quiz(props) {
       if (quiz.selected === quiz.correctAnswer) {
         // console.log("you were right");
         setCorrectAnswerCount((prevCount) => prevCount + 1);
-        setDisplayResults(true);
       } else {
-        setDisplayResults(true);
+        ("");
       }
     });
   };
@@ -67,9 +65,21 @@ function Quiz(props) {
     const allSelected = quiz.every((q) => q.selected !== "");
     if (allSelected) {
       setWarning(false);
+      setDisplayResults(true);
       calculateScore();
+      setQuiz((prevQuiz) => {
+        const updatedQuiz = prevQuiz.map((quiz) => {
+          return {
+            ...quiz,
+            finalAnswer: quiz.selected,
+          };
+        });
+        console.log(updatedQuiz);
+        return updatedQuiz;
+      });
     } else {
       setWarning(true);
+      setDisplayResults(false);
     }
   };
 
@@ -79,6 +89,7 @@ function Quiz(props) {
         question={question}
         key={question.id}
         handleSelected={handleSelected}
+        displayResults={displayResults}
       />
     );
   });
@@ -101,7 +112,7 @@ function Quiz(props) {
 
       {displayResults && (
         <Div>
-          <h5>You scored {correctAnswerCount}/4 correct answers</h5>
+          <h5>You scored {correctAnswerCount}/5 correct answers</h5>
           <button onClick={props.playAgain} className="play-again-btn btns">
             {" "}
             Play again

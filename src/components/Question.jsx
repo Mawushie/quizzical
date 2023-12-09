@@ -3,12 +3,35 @@ import { decode } from "html-entities";
 import { useState } from "react";
 
 function Question(props) {
-  const { id, question, correctAnswer, allAnswers, selected } = props.question;
+  // const [fini]
+  const { id, question, finalAswer, correctAnswer, allAnswers, selected } =
+    props.question;
+  //   console.log(props.displayResults);
 
   const answerElements = allAnswers.map((answer, index) => {
-    const styles = {
-      backgroundColor: answer === selected ? "#D6DBF5" : "transparent",
-    };
+    let styles;
+    let currentAndSelected;
+    //answer === selected && answer === correctAnswer
+    //then background is green
+    //if answer === selected and answer !==correctAnswer
+    //then background is pink
+    //if answer === correctAnswer
+    //then background is green
+    if (props.displayResults === true) {
+      answer === correctAnswer
+        ? (styles = {
+            backgroundColor: "#94D7A2",
+          })
+        : answer === selected
+        ? (styles = {
+            backgroundColor: "#F8BCBC",
+          })
+        : "";
+    } else {
+      styles = {
+        backgroundColor: answer === selected ? "#D6DBF5" : "transparent",
+      };
+    }
 
     return (
       <div className="answer" key={index} style={styles}>
