@@ -4,17 +4,20 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
 import styled from "styled-components";
+import { BounceLoader } from "react-spinners";
 
 function Quiz(props) {
   const [quiz, setQuiz] = useState([]);
   const [warning, setWarning] = useState(false);
   const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
   const [displayResults, setDisplayResults] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=18")
+    fetch("https://opentdb.com/api.php?amount=5&category=12")
       .then((res) => res.json())
       .then((data) => {
+        setLoading((prev) => !prev);
         let results = data.results;
         let quizArray = [];
         results.map((result) => {
@@ -31,7 +34,7 @@ function Quiz(props) {
             finalAnswer: "",
           });
         });
-        console.log(quizArray);
+        // console.log(quizArray);
         setQuiz(quizArray);
       });
   }, []);
@@ -74,7 +77,7 @@ function Quiz(props) {
             finalAnswer: quiz.selected,
           };
         });
-        console.log(updatedQuiz);
+        // console.log(updatedQuiz);
         return updatedQuiz;
       });
     } else {
@@ -96,6 +99,11 @@ function Quiz(props) {
 
   return (
     <div className="quiz-container">
+      {loading && (
+        <Div>
+          <BounceLoader color="#293264" />
+        </Div>
+      )}
       {quizElements}
       {quiz.length > 0 && !displayResults ? (
         <div className="align-center">

@@ -69,7 +69,7 @@ p {
 }
 
 .answers {
-  display: flex;
+  display: grid;
   gap: 14px;
   margin-top: 12px;
   margin-bottom: 14px;
@@ -122,5 +122,14 @@ hr {
   body {
     width: 600px;
     margin: auto;
+  }
+}
+
+@media (min-width: 420px) {
+  .answers {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+    margin-bottom: 14px;
   }
 }
