@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Question from "./Question";
+import styled from "styled-components";
 
 function Quiz(props) {
   const [quiz, setQuiz] = useState([]);
-  const [checkAnswer, setCheckAnswer] = useState(false);
+  const [warning, setWarning] = useState(false);
+  const [correctAnswerCount, setCorrectAnswerCount] = useState(0);
+  const [displayResults, setDisplayResults] = useState(false);
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=16")
+    fetch("https://opentdb.com/api.php?amount=4&category=10")
       .then((res) => res.json())
       .then((data) => {
         let results = data.results;
@@ -34,6 +37,7 @@ function Quiz(props) {
 
   const handleSelected = (id, selectedAnswer) => {
     // console.log(id, selectedAnswer);
+
     setQuiz((prevQuiz) => {
       const updatedQuiz = prevQuiz.map((quiz) => {
         return quiz.id === id
@@ -46,6 +50,27 @@ function Quiz(props) {
       // console.log(updatedQuiz);
       return updatedQuiz;
     });
+  };
+
+  const calculateScore = () => {
+    quiz.forEach((quiz) => {
+      if (quiz.selected === quiz.correctAnswer) {
+        // console.log("you were right");
+        setCorrectAnswerCount((prevCount) => prevCount + 1);
+        setDisplayResults(true);
+      } else {
+        setDisplayResults(true);
+      }
+    });
+  };
+  const checkAnswers = () => {
+    const allSelected = quiz.every((q) => q.selected !== "");
+    if (allSelected) {
+      setWarning(false);
+      calculateScore();
+    } else {
+      setWarning(true);
+    }
   };
 
   const quizElements = quiz.map((question) => {
@@ -61,15 +86,42 @@ function Quiz(props) {
   return (
     <div className="quiz-container">
       {quizElements}
-      {quiz.length > 0 ? (
+      {quiz.length > 0 && !displayResults ? (
         <div className="align-center">
-          <button className="check-answers-btn">Check answers</button>
+          <button className="check-answers-btn btns" onClick={checkAnswers}>
+            Check answers
+          </button>
         </div>
       ) : (
         ""
       )}
+      {warning && (
+        <H3 className="warning">Please select an answer for each question</H3>
+      )}
+
+      {displayResults && (
+        <Div>
+          <h5>You scored {correctAnswerCount}/4 correct answers</h5>
+          <button onClick={props.playAgain} className="play-again-btn btns">
+            {" "}
+            Play again
+          </button>
+        </Div>
+      )}
     </div>
   );
 }
+
+const H3 = styled.h3`
+  color: red;
+  font-family: "Karla", sans-serif;
+`;
+
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+`;
 
 export default Quiz;

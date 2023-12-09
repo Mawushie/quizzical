@@ -6,9 +6,17 @@ import Quiz from "./components/Quiz";
 function App() {
   const [start, setStart] = useState(false);
   const toggleStart = () => {
-    setStart(true);
+    setStart((prevStart) => !prevStart);
   };
-  return <main>{start ? <Quiz /> : <Start toggleStart={toggleStart} />}</main>;
+  return (
+    <main>
+      {start ? (
+        <Quiz playAgain={toggleStart} />
+      ) : (
+        <Start toggleStart={toggleStart} />
+      )}
+    </main>
+  );
 }
 
 export default App;

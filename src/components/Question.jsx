@@ -3,7 +3,7 @@ import { decode } from "html-entities";
 import { useState } from "react";
 
 function Question(props) {
-  const { id, question, allAnswers, selected } = props.question;
+  const { id, question, correctAnswer, allAnswers, selected } = props.question;
 
   const answerElements = allAnswers.map((answer, index) => {
     const styles = {
