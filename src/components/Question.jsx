@@ -4,13 +4,11 @@ import { useState } from "react";
 
 function Question(props) {
   // const [fini]
-  const { id, question, finalAswer, correctAnswer, allAnswers, selected } =
-    props.question;
+  const { id, question, correctAnswer, allAnswers, selected } = props.question;
   //   console.log(props.displayResults);
 
   const answerElements = allAnswers.map((answer, index) => {
     let styles;
-    let currentAndSelected;
     //answer === selected && answer === correctAnswer
     //then background is green
     //if answer === selected and answer !==correctAnswer

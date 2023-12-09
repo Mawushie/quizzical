@@ -14,7 +14,7 @@ function Quiz(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=12")
+    fetch("https://opentdb.com/api.php?amount=5")
       .then((res) => res.json())
       .then((data) => {
         setLoading((prev) => !prev);
@@ -31,7 +31,6 @@ function Quiz(props) {
             correctAnswer: correct_answer,
             allAnswers: sortedAnswers,
             selected: "",
-            finalAnswer: "",
           });
         });
         // console.log(quizArray);
@@ -40,6 +39,7 @@ function Quiz(props) {
   }, []);
 
   const handleSelected = (id, selectedAnswer) => {
+    //go through each of them and update the selected for that particular id
     setQuiz((prevQuiz) => {
       const updatedQuiz = prevQuiz.map((quiz) => {
         return quiz.id === id
@@ -70,16 +70,16 @@ function Quiz(props) {
       setWarning(false);
       setDisplayResults(true);
       calculateScore();
-      setQuiz((prevQuiz) => {
-        const updatedQuiz = prevQuiz.map((quiz) => {
-          return {
-            ...quiz,
-            finalAnswer: quiz.selected,
-          };
-        });
-        // console.log(updatedQuiz);
-        return updatedQuiz;
-      });
+      // setQuiz((prevQuiz) => {
+      //   const updatedQuiz = prevQuiz.map((quiz) => {
+      //     return {
+      //       ...quiz,
+      //       // finalAnswer: quiz.selected,
+      //     };
+      //   });
+      //   // console.log(updatedQuiz);
+      //   return updatedQuiz;
+      // });
     } else {
       setWarning(true);
       setDisplayResults(false);
