@@ -7,7 +7,7 @@ body {
   justify-content: center;
   /* align-items: center; */
   margin: 0;
-  background: url("lowerblob.png"), url("upperblob.png");
+  background: url("./assets/lowerblob.png"), url("./assets/upperblob.png");
   background-position: left bottom, right top;
   background-repeat: no-repeat;
   height: 100vh;
